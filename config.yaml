@@ -1,0 +1,53 @@
+# Experiment configuration. Every tunable setting of the study lives here.
+# Paths are relative to the folder that contains this file.
+
+project:
+  title: "Robotization and Wages in the US Manufacturing Industry"
+  random_seed: 42            # fixed for reproducibility (the pipeline itself is deterministic)
+
+study:
+  start_year: 2018
+  end_year: 2021
+  naics_sector: "31-33"      # manufacturing sector
+  own_code: "5"              # QCEW ownership code 5 = private
+  cpi_base_year: 2021        # wages are expressed in constant dollars of this year
+  exclude_areas:             # most cells are withheld by the Census Bureau for these areas
+    - "District of Columbia"
+    - "Hawaii"
+
+data:
+  mode: sample               # sample = smoke test on data/sample | full = real data in data/raw
+  sample:
+    robots: data/sample/robots_sample.csv
+    qcew: data/sample/qcew_sample.csv
+    cpi: data/sample/cpi_sample.csv
+  full:
+    robots_xlsx: "data/raw/ASM Robotics.xlsx"
+    robots_sheet_exposure: "Percent of... Geo"
+    robots_sheet_demeaned: "Percent of... Geo demean"
+    qcew: data/raw/qcew      # folder with QCEW annual CSV files (or a single CSV file)
+    cpi: data/raw/cpi_u_annual.csv
+    downloaded_on:           # fill in the download date of each raw file
+      robots_xlsx: null
+      qcew: null
+      cpi: null
+
+model:
+  alpha: 0.05                # significance level
+  cluster_by: state          # standard errors are clustered by state
+  covariates:                # control covariates of the main model M1 (log scale)
+    - ln_employment
+    - ln_establishments
+  year_effects: true
+  min_df_resid: 2            # models with fewer residual degrees of freedom are skipped
+
+guardrails:
+  vif_max: 10
+  breusch_pagan_alpha: 0.05
+  jarque_bera_alpha: 0.05
+  min_states_per_year: 45          # full run
+  sample_min_states_per_year: 3    # relaxed value used only for the 10-row sample
+  max_withheld_share: 0.10
+
+output:
+  dir: results
