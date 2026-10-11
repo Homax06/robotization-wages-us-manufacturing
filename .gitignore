@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# Virtual environments and secrets
+.venv/
+venv/
+env/
+.env
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Generated results (re-created by the pipeline)
+results/*
+!results/.gitkeep
+
+# Raw data is large and downloaded by the user (see data/README.md); keep only the folder
+data/raw/*
+!data/raw/.gitkeep
+*.xlsx
+*.zip
