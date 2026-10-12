@@ -16,3 +16,5 @@ data/
 
 Raw data are public statistics, but they are large or binary, so they are kept out of Git.
 Record the download date of every file in `config.yaml` (`data.full.downloaded_on`).
+
+Last reviewed by Aruna Zhakipova.
