@@ -27,5 +27,7 @@ results/*
 # Raw data is large and downloaded by the user (see data/README.md); keep only the folder
 data/raw/*
 !data/raw/.gitkeep
+!data/raw/test_run.jsonl       # bootstrap log (Task 3 requires it in the repo)
+!data/raw/test_run_meta.json   # environment metadata of that run
 *.xlsx
 *.zip

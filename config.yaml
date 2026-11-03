@@ -3,7 +3,7 @@
 
 project:
   title: "Robotization and Wages in the US Manufacturing Industry"
-  random_seed: 42            # fixed for reproducibility (the pipeline itself is deterministic)
+  random_seed: 42            # fixed for reproducibility (used by the bootstrap in src/collector.py)
 
 study:
   start_year: 2018
@@ -28,9 +28,9 @@ data:
     qcew: data/raw/qcew      # folder with QCEW annual CSV files (or a single CSV file)
     cpi: data/raw/cpi_u_annual.csv
     downloaded_on:           # fill in the download date of each raw file
-      robots_xlsx: null
-      qcew: null
-      cpi: null
+      robots_xlsx: 2026-10-11
+      qcew: 2026-10-29
+      cpi: 2026-10-22
 
 model:
   alpha: 0.05                # significance level
@@ -48,6 +48,14 @@ guardrails:
   min_states_per_year: 45          # full run
   sample_min_states_per_year: 3    # relaxed value used only for the 10-row sample
   max_withheld_share: 0.10
+  max_bootstrap_error_rate: 0.05   # share of failed bootstrap replicates that is still acceptable
+
+benchmark:                   # cluster bootstrap of M0 and M1 (src/collector.py)
+  n_warmup: 20               # first replicates, logged with phase = "warmup", excluded from metrics
+  n_runs: 1000               # replicates logged with phase = "benchmark"
+  models: [M0, M1]           # estimated on the same resampled panel in every replicate
+  output: data/raw/test_run.jsonl
+  metadata: data/raw/test_run_meta.json
 
 output:
   dir: results

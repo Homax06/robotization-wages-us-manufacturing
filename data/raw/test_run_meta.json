@@ -1,0 +1,48 @@
+{
+  "pipeline_version": "0.1.0",
+  "started_at": "2026-10-29T05:20:59.704842+00:00",
+  "python": "3.13.16",
+  "os": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "cpu_count": 2,
+  "ram_gb": 7.84,
+  "packages": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1",
+    "statsmodels": "0.15.0"
+  },
+  "config": {
+    "path": "config.yaml",
+    "sha256": "68a4a399947602c7a0d3ff86ca9a04b5eb708418bd79f3e797efafe91d7a2698"
+  },
+  "data_mode": "full",
+  "inputs": {
+    "robots_xlsx": {
+      "path": "data/raw/ASM Robotics.xlsx",
+      "sha256": "5dc20442376b4c8f90aa0bac2eb094f390ace50d6b313df318291c0179971ec4"
+    },
+    "qcew": {
+      "path": "data/raw/qcew",
+      "files": {
+        "31_33_2018.csv": "aa8294b488c38abeb5bf3d0e810677d7073e44c6ff4483eb7d33031b5db8f75d",
+        "31_33_2019.csv": "76ae0a1064857b6cc57a6a179f00591f4414b4fb150bea16c3331295ce6c69b0",
+        "31_33_2020.csv": "9d0177639462325921d886be57311762a01d4e29bb03cc0eb187c655f0103d24",
+        "31_33_2021.csv": "2241ed793ad26aa7bf218c819c3873e99d3c534effef1f432b0159fe2f215ee8"
+      }
+    },
+    "cpi": {
+      "path": "data/raw/cpi_u_annual.csv",
+      "sha256": "6676ca716292f9056cdc1446f5d3d77344f4068f3d37c18ccc1f08ad7c902856"
+    }
+  },
+  "random_seed": 42,
+  "n_warmup": 20,
+  "n_runs": 1000,
+  "models": [
+    "M0",
+    "M1"
+  ],
+  "finished_at": "2026-10-29T05:21:28.432857+00:00",
+  "n_records": 2040
+}
